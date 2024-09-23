@@ -3,12 +3,12 @@ version: '3.8'
 services:
   mysql-server:
     image: mysql:8.0
-    container_name: nuclear-mysql-server
+    container_name: ${MYSQL_URL}
     environment:
-      MYSQL_ROOT_PASSWORD: d153123
-      MYSQL_USER: my_nuclear
-      MYSQL_PASSWORD: nuclear
-      MYSQL_DATABASE: nuclear
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
     ports:
       - 3306:3306
     volumes:

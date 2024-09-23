@@ -38,3 +38,15 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+def envProps = new Properties()
+file(".env").withInputStream { envProps.load(it) }
+
+bootRun {
+    doFirst {
+        envProps.each { key, value ->
+            environment key, value
+        }
+    }
+}
+
