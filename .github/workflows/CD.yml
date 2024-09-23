@@ -52,7 +52,7 @@ jobs:
           chmod 600 /tmp/ssh_host
 
       - name: Copy files to server
-        run: scp -r -i /tmp/ssh_key Dockerfile ubuntu@/tmp/ssh_host:/home/ubuntu/server_test
+        run: scp -r -i "$key" Dockerfile ubuntu@/"$host":/home/ubuntu/server_test
 
       - name: Transfer Build File using SCP
         uses: appleboy/scp-action@master  # .jar 파일 원격 서버로 복사
