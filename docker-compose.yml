@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql-server:
+    image: mysql:8.0
+    container_name: nuclear-mysql-server
+    environment:
+      MYSQL_ROOT_PASSWORD: d153123
+      MYSQL_USER: my_nuclear
+      MYSQL_PASSWORD: nuclear
+      MYSQL_DATABASE: nuclear
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p$MYSQL_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  data-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nuclear-data-generator
+    ports:
+      - 8080:8080
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+    command: ["sh", "-c", "mysql -h nuclear-mysql-server -u$MYSQL_USER -p$MYSQL_PASSWORD nuclear"]
+
+# Uncomment this section if needed:
+#  nginx:
+#    image: nginx:latest
+#    container_name: nuclear-nginx
+#    ports:
+#      - 80:80
+#    volumes:
+#      - ./app.conf:/etc/nginx/conf.d/app.conf
+#    depends_on:
+#      - data-generator
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  mysql_data:
