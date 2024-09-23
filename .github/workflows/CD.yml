@@ -44,15 +44,8 @@ jobs:
       - name: List build directory
         run: ls -la build/libs
 
-      - name: Create SSH key file
-        run: |
-          echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_key
-          chmod 600 /tmp/ssh_key
-          echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_host
-          chmod 600 /tmp/ssh_host
-
-      - name: Copy files to server
-        run: scp -r -i "$key" Dockerfile ubuntu@"$host":/home/ubuntu/server_test
+      - name: List src
+        run: ls -la src
 
       - name: Transfer Build File using SCP
         uses: appleboy/scp-action@master  # .jar 파일 원격 서버로 복사
