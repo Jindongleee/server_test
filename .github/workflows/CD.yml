@@ -44,8 +44,10 @@ jobs:
       - name: List build directory
         run: ls -la build/libs
 
-      - name: Test SSH key value
-        run: echo "${{ secrets.SSH_KEY }}" | head -c 10  # 첫 10자만 출력
+      - name: Create SSH key file
+        run: |
+          echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
 
       - name: Copy files to server
         run: scp -r -i ${{ secrets.SSH_KEY }} Dockerfile ubuntu@${{ secrets.SSH_HOST }}:/home/ubuntu/server_test
