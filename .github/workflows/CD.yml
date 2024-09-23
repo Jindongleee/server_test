@@ -41,6 +41,9 @@ jobs:
           script: |
             mkdir -p /home/ubuntu/server_test
 
+      - name: List build directory
+        run: ls -la build/libs
+
       - name: Transfer Build File using SCP
         uses: appleboy/scp-action@master  # .jar 파일 원격 서버로 복사
         with:
