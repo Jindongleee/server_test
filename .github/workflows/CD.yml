@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: |
             build/libs/server_test-0.0.1-SNAPSHOT.jar
-            ./Dockerfile
+            server_test/Dockerfile
           target: "/home/ubuntu/server_test"
 
       - name: Deploy using Docker Compose via SSH
