@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mysql-server:
     image: mysql:8.0
-    container_name:
+    container_name: nuclear-mysql-server
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
