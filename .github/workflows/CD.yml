@@ -44,6 +44,9 @@ jobs:
       - name: List build directory
         run: ls -la build/libs
 
+      - name: Copy files to server
+        run: scp -r -i ${{ secrets.SSH_KEY }} Dockerfile ubuntu@${{ secrets.SSH_HOST }}:/home/ubuntu/server_test
+
       - name: Transfer Build File using SCP
         uses: appleboy/scp-action@master  # .jar 파일 원격 서버로 복사
         with:
@@ -52,7 +55,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: |
             build/libs/server_test-0.0.1-SNAPSHOT.jar
-            Dockerfile
           target: "/home/ubuntu/server_test"
 
       - name: Deploy using Docker Compose via SSH
