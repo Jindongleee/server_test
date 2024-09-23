@@ -48,9 +48,11 @@ jobs:
         run: |
           echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
+          echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_host
+          chmod 600 /tmp/ssh_host
 
       - name: Copy files to server
-        run: scp -r -i /tmp/ssh_key Dockerfile ubuntu@${{ secrets.SSH_HOST }}:/home/ubuntu/server_test
+        run: scp -r -i /tmp/ssh_key Dockerfile ubuntu@/tmp/ssh_host:/home/ubuntu/server_test
 
       - name: Transfer Build File using SCP
         uses: appleboy/scp-action@master  # .jar 파일 원격 서버로 복사
