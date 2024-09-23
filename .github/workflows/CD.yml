@@ -52,10 +52,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: |
             build/libs/server_test-0.0.1-SNAPSHOT.jar
+            src/main/resources/application.properties
             Dockerfile
             app.conf
             docker-compose.yml
-            application.properties
           target: "/home/ubuntu/server_test"
 
       - name: Deploy using Docker Compose via SSH
