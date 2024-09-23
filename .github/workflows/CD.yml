@@ -51,7 +51,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_KEY }}
           source: |
-            server_test-0.0.1-SNAPSHOT.jar
+            build/libs/server_test-0.0.1-SNAPSHOT.jar
             Dockerfile
             app.conf
             docker-compose.yml
