@@ -32,15 +32,15 @@ services:
     command: ["sh", "-c", "mysql -h nuclear-mysql-server -u$MYSQL_USER -p$MYSQL_PASSWORD nuclear"]
 
 # Uncomment this section if needed:
-#  nginx:
-#    image: nginx:latest
-#    container_name: nuclear-nginx
-#    ports:
-#      - 80:80
-#    volumes:
-#      - ./app.conf:/etc/nginx/conf.d/app.conf
-#    depends_on:
-#      - data-generator
+  nginx:
+    image: nginx:latest
+    container_name: nuclear-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./app.conf:/etc/nginx/conf.d/app.conf
+    depends_on:
+      - data-generator
 
 networks:
   default:
