@@ -39,8 +39,13 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+// envProps 변수 정의
 def envProps = new Properties()
-file(".env").withInputStream { envProps.load(it) }
+if (file(".env").exists()) {
+    file(".env").withInputStream { envProps.load(it) }
+} else {
+    println(".env 파일이 존재하지 않습니다.")
+}
 
 bootRun {
     doFirst {
@@ -49,4 +54,3 @@ bootRun {
         }
     }
 }
-
